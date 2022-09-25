@@ -1,6 +1,8 @@
 import time, random
 
 def rainbow(strip, numpix):
+    print("Rainbow starting")
+
     red = (255, 0, 0)
     orange = (255, 165, 0)
     yellow = (255, 150, 0)
@@ -28,6 +30,8 @@ def rainbow(strip, numpix):
                 strip.show()
 
 def smoothRainbow(strip, numpix):
+    print("Smooth rainbow starting")
+
     hue = 0
     
     while(True):
@@ -38,6 +42,8 @@ def smoothRainbow(strip, numpix):
         hue += 150
 
 def fireflies(strip, numpix):
+    print("Fireflies starting")
+
     colors_rgb = [
     (232, 100, 255),  # Purple
     (200, 200, 20),  # Yellow
@@ -90,6 +96,8 @@ def fireflies(strip, numpix):
             time.sleep(0.005)
 
 def colorwave(strip, numpix):
+    print("Colorwave starting")
+
     red = (255, 0, 0)
     orange = (255, 50, 0)
     yellow = (255, 100, 0)
@@ -115,6 +123,8 @@ def colorwave(strip, numpix):
         strip.show()
 
 def setRange(strip, numpix):
+    print("setRange starting")
+
     K = 3
 
     red = (255, 0, 0)
