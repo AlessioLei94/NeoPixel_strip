@@ -1,10 +1,9 @@
 from Neopixel_lib.neopixel import Neopixel
-from Patterns.patterns import *
+import Patterns.patterns, Buttons.buttons
 
 numpix = 300
 strip = Neopixel(numpix, 1, 1, "GRB")
 
+Buttons.Init()
 
-colorwave(strip, numpix)
-
-fireflies(strip, numpix)
+Patterns.fireflies(strip, numpix)
