@@ -1,12 +1,27 @@
 from machine import Pin
+import Fsm
+import time
 
 btn1Pin = Pin(18, Pin.OUT)
 btn2Pin = Pin(19, Pin.OUT)
 btn3Pin = Pin(20, Pin.OUT)
 btn4Pin = Pin(21, Pin.OUT)
 
+btn1T = 0
+btn2T = 0
+btn3T = 0
+btn4T = 0
+
 def btn1Cb(pin):
-    print("BTN1 callback")
+    global btn1T
+    if(btn1T == 0):
+        btn1T = time.ticks_ms()
+        return
+    elif((time.ticks_ms() - btn1T) < 200):
+        btn1T = time.ticks_ms()
+        return
+    
+    Fsm.patternFW()
 
 def btn2Cb(pin):
     print("BTN2 callback")
