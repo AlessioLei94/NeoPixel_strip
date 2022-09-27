@@ -1,9 +1,11 @@
 from Neopixel_lib.neopixel import Neopixel
-import Patterns.patterns, Buttons.buttons
+import Fsm.fsm as Fsm
+import time
 
 numpix = 300
 strip = Neopixel(numpix, 1, 1, "GRB")
 
-Buttons.Init()
+while True:
+    Fsm.run(strip, numpix)
 
-Patterns.fireflies(strip, numpix)
+    time.sleep(1)
