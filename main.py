@@ -8,4 +8,4 @@ strip = Neopixel(numpix, 1, 1, "GRB")
 while True:
     Fsm.run(strip, numpix)
 
-    time.sleep(1)
+    time.sleep(0.1)
