@@ -30,6 +30,8 @@ def patternFW():
     else:
         __patternIdx__ = __patternIdx__ + 1
 
+    Patterns.stopCurrentPattern()
+
 def patternBW():
     global __patternIdx__, patterns
 
@@ -37,6 +39,8 @@ def patternBW():
         __patternIdx__ = patternCount - 1
     else:
         __patternIdx__ = __patternIdx__ - 1
+
+    Patterns.stopCurrentPattern()
 
 def run(strip, numpix):
     global FSM_INIT, FSM_RUN, FSM_STOP
@@ -49,4 +53,3 @@ def run(strip, numpix):
 
     elif(__fsmState__ == FSM_RUN):
         patterns[__patternIdx__](strip, numpix)
-
