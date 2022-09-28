@@ -1,6 +1,13 @@
 import time, random
 
+__patternStop__ = False
+
+def stopCurrentPattern():
+    global __patternStop__
+    __patternStop__ = True
+
 def rainbow(strip, numpix):
+    global __patternStop__
     print("Rainbow starting")
 
     red = (255, 0, 0)
@@ -29,19 +36,29 @@ def rainbow(strip, numpix):
                 time.sleep(0.01)
                 strip.show()
 
+                if(__patternStop__ == True):
+                    __patternStop__ = False
+                    return
+
 def smoothRainbow(strip, numpix):
+    global __patternStop__
     print("Smooth rainbow starting")
 
     hue = 0
-    
+
     while(True):
         color = strip.colorHSV(hue, 255, 150)
         strip.fill(color)
         strip.show()
-        
+
         hue += 150
 
+        if(__patternStop__ == True):
+            __patternStop__ = False
+            return
+
 def fireflies(strip, numpix):
+    global __patternStop__
     print("Fireflies starting")
 
     colors_rgb = [
@@ -71,7 +88,7 @@ def fireflies(strip, numpix):
         col = random.randint(1, len(colors) - 1)
         flash_len = random.randint(min_len, max_len)
         flashing.append([pix, colors[col], flash_len, 0, 1])
-        
+
     strip.fill((0,0,0))
 
     while True:
@@ -95,7 +112,12 @@ def fireflies(strip, numpix):
             flashing[i][3] = flashing[i][3] + flashing[i][4]
             time.sleep(0.005)
 
+            if(__patternStop__ == True):
+                __patternStop__ = False
+                return
+
 def colorwave(strip, numpix):
+    global __patternStop__
     print("Colorwave starting")
 
     red = (255, 0, 0)
@@ -122,7 +144,12 @@ def colorwave(strip, numpix):
         time.sleep(0.042)
         strip.show()
 
+        if(__patternStop__ == True):
+            __patternStop__ = False
+            return
+
 def setRange(strip, numpix):
+    global __patternStop__
     print("setRange starting")
 
     K = 3
@@ -152,8 +179,20 @@ def setRange(strip, numpix):
     time.sleep(5.0)
 
     # spin it...
+    sleepTime = 0.1
+    spinTime = 0.5
+    idx = 0
 
     while(True):
-        strip.rotate_right()
-        strip.show()
-        time.sleep(0.5)
+        if(idx * sleepTime >= sleepTime):
+            strip.rotate_right()
+            strip.show()
+            idx = 0
+
+        time.sleep(sleepTime)
+
+        idx = idx + 1
+
+        if(__patternStop__ == True):
+            __patternStop__ = False
+            return
