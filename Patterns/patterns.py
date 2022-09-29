@@ -17,15 +17,7 @@ def rainbow(strip, numpix):
     blue = (0, 0, 255)
     indigo = (75, 0, 130)
     violet = (138, 43, 226)
-    colors_rgb = (red, orange, yellow, green, blue, indigo, violet)
-
-    # same colors as normaln rgb, just 0 added at the end
-    colors_rgbw = [color+tuple([0]) for color in colors_rgb]
-    colors_rgbw.append((0, 0, 0, 255))
-
-    # uncomment colors_rgb if you have RGB strip
-    # colors = colors_rgb
-    colors = colors_rgbw
+    colors = (red, orange, yellow, green, blue, indigo, violet)
 
     strip.brightness(42)
 
@@ -61,20 +53,12 @@ def fireflies(strip, numpix):
     global __patternStop__
     print("Fireflies starting")
 
-    colors_rgb = [
+    colors = [
     (232, 100, 255),  # Purple
     (200, 200, 20),  # Yellow
     (30, 200, 200),  # Blue
     (150,50,10),
     (50,200,10), ]
-
-    # same colors as normaln rgb, just 0 added at the end
-    colors_rgbw = [color+tuple([0]) for color in colors_rgb]
-    colors_rgbw.append((0, 0, 0, 255))
-
-    # uncomment colors_rgbw if you have RGBW strip
-    colors = colors_rgb
-    # colors = colors_rgbw
 
     max_len=20
     min_len = 5
