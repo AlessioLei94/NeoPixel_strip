@@ -25,7 +25,7 @@ def patternFW():
     if(__patternIdx__ == Patterns.patternCount - 1):
         __patternIdx__ = 0
     else:
-        __patternIdx__ = __patternIdx__ + 1
+        __patternIdx__ += __patternIdx__
 
     Patterns.stopCurrentPattern()
 
@@ -35,7 +35,7 @@ def patternBW():
     if(__patternIdx__ == 0):
         __patternIdx__ = Patterns.patternCount - 1
     else:
-        __patternIdx__ = __patternIdx__ - 1
+        __patternIdx__ -= __patternIdx__
 
     Patterns.stopCurrentPattern()
 
