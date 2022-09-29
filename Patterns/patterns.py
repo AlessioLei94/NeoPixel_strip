@@ -196,3 +196,6 @@ def setRange(strip, numpix):
         if(__patternStop__ == True):
             __patternStop__ = False
             return
+
+patternList = [ colorwave, fireflies, rainbow, smoothRainbow, setRange ]
+patternCount = len(patternList)
