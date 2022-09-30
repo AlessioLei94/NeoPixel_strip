@@ -12,25 +12,35 @@ btn2T = 0
 btn3T = 0
 btn4T = 0
 
-def btn1Cb(pin):
-    global btn1T
+__debounceT_ = 500
 
-    if((time.ticks_ms() - btn1T) > 1000 or (btn1T == 0)):
+def btn1Cb(pin):
+    global btn1T, __debounceT_
+
+    if((time.ticks_ms() - btn1T) > __debounceT_ or (btn1T == 0)):
         btn1T = time.ticks_ms()
         Fsm.patternFW()
 
 def btn2Cb(pin):
-    global btn2T
+    global btn2T, __debounceT_
 
-    if((time.ticks_ms() - btn2T) > 1000 or (btn2T == 0)):
+    if((time.ticks_ms() - btn2T) > __debounceT_ or (btn2T == 0)):
         btn2T = time.ticks_ms()
         Fsm.patternBW()
 
 def btn3Cb(pin):
-    print("BTN3 callback")
+    global btn3T, __debounceT_
+
+    if((time.ticks_ms() - btn3T) > __debounceT_ or (btn3T == 0)):
+        btn3T = time.ticks_ms()
+        Fsm.brightUp()
 
 def btn4Cb(pin):
-    print("BTN4 callback")
+    global btn4T, __debounceT_
+
+    if((time.ticks_ms() - btn4T) > __debounceT_ or (btn4T == 0)):
+        btn4T = time.ticks_ms()
+        Fsm.brightDw()
 
 def Init():
     btn1Pin.irq(btn1Cb, trigger=Pin.IRQ_RISING)
