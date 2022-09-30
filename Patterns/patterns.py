@@ -1,6 +1,8 @@
 import time, random
 
 __patternStop__ = False
+__brightness__ = 100 #Default
+__brightStep__ = 25
 
 def stopCurrentPattern():
     global __patternStop__
@@ -18,8 +20,6 @@ def rainbow(strip, numpix):
     indigo = (75, 0, 130)
     violet = (138, 43, 226)
     colors = (red, orange, yellow, green, blue, indigo, violet)
-
-    strip.brightness(42)
 
     while True:
         for color in colors:
@@ -115,7 +115,6 @@ def colorwave(strip, numpix):
 
     step = round(numpix / len(colors))
     current_pixel = 0
-    strip.brightness(100)
 
     for color1, color2 in zip(colors, colors[1:]):
         strip.set_pixel_line_gradient(current_pixel, current_pixel + step, color1, color2)
@@ -147,8 +146,6 @@ def setRange(strip, numpix):
 
     # reduce K, if numpix is < K*3+1
     K = min(K,(numpix-1)//3)
-
-    strip.brightness(80)
 
     strip[:] = blue   # all to blue first...
     # now fill in the red & green...
