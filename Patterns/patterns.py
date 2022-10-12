@@ -8,6 +8,12 @@ def stopCurrentPattern():
     global __patternStop__
     __patternStop__ = True
 
+def checkStop():
+    global __patternStop__
+    if(__patternStop__ == True):
+        __patternStop__ = False
+        return
+
 def rainbow(strip, numpix):
     global __patternStop__
     print("Rainbow starting")
@@ -28,9 +34,7 @@ def rainbow(strip, numpix):
                 time.sleep(0.01)
                 strip.show()
 
-                if(__patternStop__ == True):
-                    __patternStop__ = False
-                    return
+                checkStop()
 
 def smoothRainbow(strip, numpix):
     global __patternStop__
@@ -45,9 +49,7 @@ def smoothRainbow(strip, numpix):
 
         hue += 150
 
-        if(__patternStop__ == True):
-            __patternStop__ = False
-            return
+        checkStop()
 
 def fireflies(strip, numpix):
     global __patternStop__
@@ -81,10 +83,10 @@ def fireflies(strip, numpix):
 
             pix = flashing[i][0]
             brightness = (flashing[i][3]/flashing[i][2])
-            colr = (int(flashing[i][1][0]*brightness), 
-                    int(flashing[i][1][1]*brightness), 
+            color = (int(flashing[i][1][0]*brightness),
+                    int(flashing[i][1][1]*brightness),
                     int(flashing[i][1][2]*brightness))
-            strip.set_pixel(pix, colr)
+            strip.set_pixel(pix, color)
 
             if flashing[i][2] == flashing[i][3]:
                 flashing[i][4] = -1
@@ -96,9 +98,7 @@ def fireflies(strip, numpix):
             flashing[i][3] = flashing[i][3] + flashing[i][4]
             time.sleep(0.005)
 
-            if(__patternStop__ == True):
-                __patternStop__ = False
-                return
+            checkStop()
 
 def colorwave(strip, numpix):
     global __patternStop__
@@ -127,9 +127,7 @@ def colorwave(strip, numpix):
         time.sleep(0.042)
         strip.show()
 
-        if(__patternStop__ == True):
-            __patternStop__ = False
-            return
+        checkStop()
 
 def setRange(strip, numpix):
     global __patternStop__
@@ -174,9 +172,115 @@ def setRange(strip, numpix):
 
         idx = idx + 1
 
-        if(__patternStop__ == True):
-            __patternStop__ = False
-            return
+        checkStop()
 
-patternList = [ colorwave, fireflies, rainbow, smoothRainbow, setRange ]
+def worm(strip, numpix):
+    global __patternStop__
+    head = random.randint(0, numpix-1)
+    butt = head
+    lenght = random.randint(7, 15)
+    color1 = (0,0,0)
+    color2 = (0,0,0)
+
+    red = (255, 0, 0)
+    orange = (255, 50, 0)
+    yellow = (255, 100, 0)
+    green = (0, 255, 0)
+    blue = (0, 0, 255)
+    indigo = (100, 0, 90)
+    violet = (200, 0, 100)
+    colors = [red, orange, yellow, green, blue, indigo, violet]
+
+    #create new worm
+    head = 1 #random.randint(0, numpix-1)
+    butt = head-lenght
+
+    color1 = colors[random.randint(0, (len(colors)//2-1))]
+    color2 = colors[random.randint(len(colors)//2, len(colors)-1)]
+
+    #print first time
+    strip[:] = color1
+    strip[butt:head] = color2
+    strip.show()
+
+    while(True):
+        print("bigger")
+
+        for _ in range(10):
+            #cover up old worm
+            strip[butt:head] = color1
+
+            #move
+            head += 1
+            butt += 1
+
+            print("s: h b", head, butt)
+
+            #bigger worm
+            head = min(numpix-1, head+1)
+            print("h: h b", head, butt)
+
+            butt = max(0, butt-1)
+            butt = min(numpix-1, butt)
+
+            print("b: h b", head, butt)
+
+            #show new worm
+            strip[butt:head] = color2
+            strip.show()
+
+            checkStop()
+            #check if we got to the end
+            if(head == butt):
+                #create new worm
+                head = random.randint(0, numpix-1)
+                butt = head-lenght
+
+                color1 = colors[random.randint(0, (len(colors)//2-1))]
+                color2 = colors[random.randint(len(colors)//2, len(colors)-1)]
+
+                #reset strip
+                strip[:] = color1
+
+            time.sleep(0.01)
+
+        print("smaller")
+
+        for _ in range(10):
+            #cover up old worm
+            strip[butt:head] = color1
+
+            #move
+            head += 1
+            butt += 1
+
+            print("s: h b", head, butt)
+            #smaller warm
+            head = min(numpix-1, head-1)
+            print("h: h b", head, butt)
+            butt = min(numpix-1, butt+1)
+
+            print("b: h b", head, butt)
+
+            #show new worm
+            strip[butt:head] = color2
+            strip.show()
+
+
+            checkStop()
+            #check if we got to the end
+            if(head == butt):
+                #create new worm
+                head = random.randint(0, numpix-1)
+                butt = head-lenght
+
+                color1 = colors[random.randint(0, (len(colors)//2-1))]
+                color2 = colors[random.randint(len(colors)//2, len(colors)-1)]
+
+                #reset strip
+                strip[:] = color1
+
+            time.sleep(0.01)
+
+patternList = [ worm, colorwave, fireflies, rainbow, smoothRainbow, setRange ]
 patternCount = len(patternList)
