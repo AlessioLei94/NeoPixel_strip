@@ -1,11 +1,11 @@
-from Neopixel_lib.neopixel import Neopixel
-from Patterns.patterns import __brightness__
+from Neopixel_lib import neopixel
+import Patterns.patterns as Patterns
 import Fsm.fsm as Fsm
 import time
 
 numpix = 300
-strip = Neopixel(numpix, 1, 1, "GRB")
-strip.brightness(__brightness__)
+strip = neopixel.Neopixel(numpix, 1, 1, "GRB")
+strip.brightness(Patterns.__brightness__)
 
 Fsm.init(strip, numpix)
 
