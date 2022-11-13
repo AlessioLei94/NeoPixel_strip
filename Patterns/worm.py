@@ -33,7 +33,7 @@ def bigWorm(numpix):
     butt = max(0, butt-1)
     butt = min(numpix-1, butt)
 
-    print("big: h b", head, butt)
+    #print("big: h b", head, butt)
 
 def smallWorm(numpix):
     global head, butt
@@ -41,7 +41,7 @@ def smallWorm(numpix):
     head = min(numpix-1, head-1)
     butt = min(numpix-1, butt+1)
 
-    print("small: h b", head, butt)
+    #print("small: h b", head, butt)
 
 def newWorm():
     global head, butt
