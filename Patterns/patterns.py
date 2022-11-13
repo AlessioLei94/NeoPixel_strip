@@ -1,4 +1,5 @@
 import time, random
+from Patterns.worm import worm
 
 __patternStop__ = False
 __brightness__ = 100 #Default
@@ -173,114 +174,6 @@ def setRange(strip, numpix):
         idx = idx + 1
 
         checkStop()
-
-def worm(strip, numpix):
-    global __patternStop__
-    head = random.randint(0, numpix-1)
-    butt = head
-    lenght = random.randint(7, 15)
-    color1 = (0,0,0)
-    color2 = (0,0,0)
-
-    red = (255, 0, 0)
-    orange = (255, 50, 0)
-    yellow = (255, 100, 0)
-    green = (0, 255, 0)
-    blue = (0, 0, 255)
-    indigo = (100, 0, 90)
-    violet = (200, 0, 100)
-    colors = [red, orange, yellow, green, blue, indigo, violet]
-
-    #create new worm
-    head = 1 #random.randint(0, numpix-1)
-    butt = head-lenght
-
-    color1 = colors[random.randint(0, (len(colors)//2-1))]
-    color2 = colors[random.randint(len(colors)//2, len(colors)-1)]
-
-    #print first time
-    strip[:] = color1
-    strip[butt:head] = color2
-    strip.show()
-
-    while(True):
-        print("bigger")
-
-        for _ in range(10):
-            #cover up old worm
-            strip[butt:head] = color1
-
-            #move
-            head += 1
-            butt += 1
-
-            print("s: h b", head, butt)
-
-            #bigger worm
-            head = min(numpix-1, head+1)
-            print("h: h b", head, butt)
-
-            butt = max(0, butt-1)
-            butt = min(numpix-1, butt)
-
-            print("b: h b", head, butt)
-
-            #show new worm
-            strip[butt:head] = color2
-            strip.show()
-
-            checkStop()
-            #check if we got to the end
-            if(head == butt):
-                #create new worm
-                head = random.randint(0, numpix-1)
-                butt = head-lenght
-
-                color1 = colors[random.randint(0, (len(colors)//2-1))]
-                color2 = colors[random.randint(len(colors)//2, len(colors)-1)]
-
-                #reset strip
-                strip[:] = color1
-
-            time.sleep(0.01)
-
-        print("smaller")
-
-        for _ in range(10):
-            #cover up old worm
-            strip[butt:head] = color1
-
-            #move
-            head += 1
-            butt += 1
-
-            print("s: h b", head, butt)
-            #smaller warm
-            head = min(numpix-1, head-1)
-            print("h: h b", head, butt)
-            butt = min(numpix-1, butt+1)
-
-            print("b: h b", head, butt)
-
-            #show new worm
-            strip[butt:head] = color2
-            strip.show()
-
-
-            checkStop()
-            #check if we got to the end
-            if(head == butt):
-                #create new worm
-                head = random.randint(0, numpix-1)
-                butt = head-lenght
-
-                color1 = colors[random.randint(0, (len(colors)//2-1))]
-                color2 = colors[random.randint(len(colors)//2, len(colors)-1)]
-
-                #reset strip
-                strip[:] = color1
-
-            time.sleep(0.01)
 
 patternList = [ worm, colorwave, fireflies, rainbow, smoothRainbow, setRange ]
 patternCount = len(patternList)
