@@ -1,11 +1,5 @@
 import time, random
 
-head = 1
-butt = head
-lenght = random.randint(7, 15)
-color1 = (0,0,0)
-color2 = (0,0,0)
-
 red = (255, 0, 0)
 orange = (255, 50, 0)
 yellow = (255, 100, 0)
@@ -15,19 +9,19 @@ indigo = (100, 0, 90)
 violet = (200, 0, 100)
 colors = [red, orange, yellow, green, blue, indigo, violet]
 
-def moveFW():
-    global head, butt
+def moveFW(head, butt):
     head += 1
     butt += 1
 
-def moveBW():
-    global head, butt
+    return head, butt
+
+def moveBW(head, butt):
     head -= 1
     butt -= 1
 
-def bigWorm(numpix):
-    global head, butt
+    return head, butt
 
+def bigWorm(numpix, head, butt):
     head = min(numpix-1, head+1)
 
     butt = max(0, butt-1)
@@ -35,17 +29,17 @@ def bigWorm(numpix):
 
     #print("big: h b", head, butt)
 
-def smallWorm(numpix):
-    global head, butt
+    return head, butt
 
+def smallWorm(numpix, head, butt):
     head = min(numpix-1, head-1)
     butt = min(numpix-1, butt+1)
 
     #print("small: h b", head, butt)
 
-def newWorm():
-    global head, butt
-    global color1, color2, colors
+    return head, butt
+
+def newWorm(head, butt, color1, color2, colors, lenght):
 
     head = 1 #random.randint(0, numpix-1)
     butt = head-lenght
@@ -53,16 +47,15 @@ def newWorm():
     color1 = colors[random.randint(0, (len(colors)//2-1))]
     color2 = colors[random.randint(len(colors)//2, len(colors)-1)]
 
-def showWorm(strip):
-    global head, butt
-    global color1, color2
+    return head, butt, color1, color2
+
+def showWorm(strip, head, butt, color1, color2):
 
     strip[:] = color1
     strip[butt:head] = color2
     strip.show()
 
-def isDead():
-    global head, butt
+def isDead(head, butt):
 
     #check if we got to the end
     if(head == butt):
@@ -71,46 +64,53 @@ def isDead():
     return False
 
 def worm(strip, npx):
+    global colors
+    head = 1
+    butt = head
+    lenght = random.randint(7, 15)
+    color1 = (0,0,0)
+    color2 = (0,0,0)
+
     #create new worm
-    newWorm()
+    head, butt, color1, color2 = newWorm(head, butt, color1, color2, colors, lenght)
 
     #print first time
-    showWorm(strip)
+    showWorm(strip, head, butt, color1, color2)
 
     while(True):
         #bigger
         for _ in range(10):
             #move
-            moveFW()
+            head, butt = moveFW(head, butt)
 
             #bigger worm
-            bigWorm(npx)
+            head, butt = bigWorm(npx, head, butt)
 
             #show new worm
-            showWorm(strip)
+            showWorm(strip, head, butt, color1, color2)
 
             Patterns.checkStop()
             #check if we got to the end
-            if isDead():
-                newWorm()
+            if isDead(head, butt):
+                head, butt, color1, color2 = newWorm(head, butt, color1, color2, colors, lenght)
 
             time.sleep(0.01)
 
         #smaller
         for _ in range(10):
             #move
-            moveFW()
+            head, butt = moveFW(head, butt)
 
             #smaller warm
-            smallWorm(npx)
+            head, butt = smallWorm(npx, head, butt)
 
             #show new worm
-            showWorm(strip)
+            showWorm(strip, head, butt, color1, color2)
 
             Patterns.checkStop()
             #check if we got to the end
-            if isDead():
-                newWorm()
+            if isDead(head, butt):
+                head, butt, color1, color2 = newWorm(head, butt, color1, color2, colors, lenght)
 
             time.sleep(0.01)
 
