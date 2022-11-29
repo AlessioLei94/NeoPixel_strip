@@ -175,5 +175,5 @@ def setRange(strip, numpix):
 
         checkStop()
 
-patternList = [ worm, colorwave, fireflies, rainbow, smoothRainbow, setRange ]
+patternList = [ multiWorm, colorwave, fireflies, rainbow, smoothRainbow, setRange ]
 patternCount = len(patternList)
