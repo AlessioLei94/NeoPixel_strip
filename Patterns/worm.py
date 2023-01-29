@@ -89,7 +89,9 @@ def worm(strip, npx):
             #show new worm
             showWorm(strip, head, butt, color1, color2)
 
-            Patterns.checkStop()
+            if(Patterns.checkStop()):
+                return
+
             #check if we got to the end
             if isDead(head, butt):
                 head, butt, color1, color2 = newWorm(head, butt, color1, color2, colors, lenght)

@@ -13,7 +13,7 @@ def checkStop():
     global __patternStop__
     if(__patternStop__ == True):
         __patternStop__ = False
-        return
+        return True
 
 def rainbow(strip, numpix):
     global __patternStop__
@@ -35,7 +35,9 @@ def rainbow(strip, numpix):
                 time.sleep(0.01)
                 strip.show()
 
-                checkStop()
+                # Check if we need to stop
+                if(checkStop()):
+                    return
 
 def smoothRainbow(strip, numpix):
     global __patternStop__
@@ -50,7 +52,9 @@ def smoothRainbow(strip, numpix):
 
         hue += 150
 
-        checkStop()
+        # Check if we need to stop
+        if(checkStop()):
+            return
 
 def fireflies(strip, numpix):
     global __patternStop__
@@ -99,7 +103,9 @@ def fireflies(strip, numpix):
             flashing[i][3] = flashing[i][3] + flashing[i][4]
             time.sleep(0.005)
 
-            checkStop()
+            # Check if we need to stop
+            if(checkStop()):
+                return
 
 def colorwave(strip, numpix):
     global __patternStop__
@@ -128,7 +134,9 @@ def colorwave(strip, numpix):
         time.sleep(0.042)
         strip.show()
 
-        checkStop()
+        # Check if we need to stop
+        if(checkStop()):
+            return
 
 def setRange(strip, numpix):
     global __patternStop__
@@ -173,7 +181,9 @@ def setRange(strip, numpix):
 
         idx = idx + 1
 
-        checkStop()
+        # Check if we need to stop
+        if(checkStop()):
+            return
 
 patternList = [ worm, colorwave, fireflies, rainbow, smoothRainbow, setRange ]
 patternCount = len(patternList)
