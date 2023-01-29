@@ -3,7 +3,7 @@ import Patterns.patterns as Patterns
 import Fsm.fsm as Fsm
 import time
 
-numpix = 300
+numpix = 120
 strip = neopixel.Neopixel(numpix, 1, 1, "GRB")
 strip.brightness(Patterns.__brightness__)
 
