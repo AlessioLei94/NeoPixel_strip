@@ -71,6 +71,8 @@ def worm(strip, npx):
     color1 = (0,0,0)
     color2 = (0,0,0)
 
+    print("Worm starting")
+
     #create new worm
     head, butt, color1, color2 = newWorm(head, butt, color1, color2, colors, lenght)
 
