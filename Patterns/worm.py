@@ -22,66 +22,72 @@ def moveBW(head, butt):
     return head, butt
 
 def bigWorm(numpix, head, butt):
-    head = min(numpix-1, head+1)
+    head = head+1
+    butt = butt-1
 
-    butt = max(0, butt-1)
-    butt = min(numpix-1, butt)
-
-    #print("big: h b", head, butt)
+    print("big: h:" , head, "b:" ,butt)
 
     return head, butt
 
 def smallWorm(numpix, head, butt):
-    head = min(numpix-1, head-1)
-    butt = min(numpix-1, butt+1)
+    head = head-1
+    butt = butt+1
 
-    #print("small: h b", head, butt)
+    print("small: h:" , head, "b:" ,butt)
 
     return head, butt
 
-def newWorm(head, butt, color1, color2, colors, lenght):
+def newWorm(head, butt, color1, color2, colors):
+    lenght = random.randint(15, 50)
+    step_len = lenght / 3
 
-    head = 1 #random.randint(0, numpix-1)
+    head = 1
     butt = head-lenght
+
+    print("New worm is h:", head, "b:", butt)
 
     color1 = colors[random.randint(0, (len(colors)//2-1))]
     color2 = colors[random.randint(len(colors)//2, len(colors)-1)]
 
-    return head, butt, color1, color2
+    return head, butt, color1, color2, lenght, step_len
 
-def showWorm(strip, head, butt, color1, color2):
+def showWorm(strip, numpix, head, butt, color1, color2):
+    # Don't go out of bounds
+    butt = max(butt, 0)
+    head = min(head, numpix)
 
     strip[:] = color1
     strip[butt:head] = color2
     strip.show()
 
-def isDead(head, butt):
-
+def isDead(head, butt, numpix):
     #check if we got to the end
-    if(head == butt):
+    if(butt >= numpix):
         return True
 
     return False
 
 def worm(strip, npx):
     global colors
+    lenght = random.randint(15, 50)
     head = 1
-    butt = head
-    lenght = random.randint(7, 15)
+    butt = head - lenght
+    step_len = lenght / 3
+    sleepTime = 0.2 #sec
     color1 = (0,0,0)
     color2 = (0,0,0)
 
     print("Worm starting")
 
     #create new worm
-    head, butt, color1, color2 = newWorm(head, butt, color1, color2, colors, lenght)
+    head, butt, color1, color2, lenght, step_len = newWorm(head, butt, color1, color2, colors)
 
     #print first time
-    showWorm(strip, head, butt, color1, color2)
+    showWorm(strip, npx, head, butt, color1, color2)
 
     while(True):
         #bigger
-        for _ in range(10):
+        for _ in range(step_len):
             #move
             head, butt = moveFW(head, butt)
 
@@ -89,19 +95,19 @@ def worm(strip, npx):
             head, butt = bigWorm(npx, head, butt)
 
             #show new worm
-            showWorm(strip, head, butt, color1, color2)
+            showWorm(strip, npx, head, butt, color1, color2)
 
             if(Patterns.checkStop()):
                 return
 
             #check if we got to the end
-            if isDead(head, butt):
-                head, butt, color1, color2 = newWorm(head, butt, color1, color2, colors, lenght)
+            if isDead(head, butt, npx):
+                head, butt, color1, color2, lenght, step_len = newWorm(head, butt, color1, color2, colors)
 
-            time.sleep(0.01)
+            time.sleep(sleepTime)
 
         #smaller
-        for _ in range(10):
+        for _ in range(step_len):
             #move
             head, butt = moveFW(head, butt)
 
@@ -109,14 +115,14 @@ def worm(strip, npx):
             head, butt = smallWorm(npx, head, butt)
 
             #show new worm
-            showWorm(strip, head, butt, color1, color2)
+            showWorm(strip, npx, head, butt, color1, color2)
 
             Patterns.checkStop()
             #check if we got to the end
-            if isDead(head, butt):
-                head, butt, color1, color2 = newWorm(head, butt, color1, color2, colors, lenght)
+            if isDead(head, butt, npx):
+                head, butt, color1, color2, lenght, step_len = newWorm(head, butt, color1, color2, colors)
 
-            time.sleep(0.01)
+            time.sleep(sleepTime)
 
 #import at the end of the file because
 #of cyclic import between worm and patterns
