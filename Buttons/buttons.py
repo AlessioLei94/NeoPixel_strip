@@ -2,10 +2,10 @@ from machine import Pin
 import Fsm.fsm as Fsm
 import time
 
-btn1Pin = Pin(18, Pin.IN, Pin.PULL_DOWN)
-btn2Pin = Pin(19, Pin.IN, Pin.PULL_DOWN)
-btn3Pin = Pin(20, Pin.IN, Pin.PULL_DOWN)
-btn4Pin = Pin(21, Pin.IN, Pin.PULL_DOWN)
+btn1Pin = Pin(20, Pin.IN, Pin.PULL_DOWN) # Pattern FW
+btn2Pin = Pin(18, Pin.IN, Pin.PULL_DOWN) # Pattern BW
+btn3Pin = Pin(21, Pin.IN, Pin.PULL_DOWN) # Brightness UP
+btn4Pin = Pin(19, Pin.IN, Pin.PULL_DOWN) # Brightness DOWN
 
 btn1T = 0
 btn2T = 0
