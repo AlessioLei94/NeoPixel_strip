@@ -65,7 +65,7 @@ def brightDw():
 
     __strip__.brightness(Patterns.__brightness__)
 
-def run():
+def run(party):
     global FSM_INIT, FSM_RUN, FSM_STOP
     global __patternIdx__
     global __fsmState__
@@ -73,6 +73,7 @@ def run():
 
     if(__fsmState__ == FSM_INIT):
         Buttons.Init()
+        Patterns.setList(party)
         __fsmState__ = FSM_RUN
 
     elif(__fsmState__ == FSM_RUN):

@@ -214,6 +214,18 @@ def setRange(strip, numpix):
         if(checkStop()):
             return
 
+
 #patternList = [ worm, colorwave, fireflies, rainbow, smoothRainbow, setRange ]
-patternList = [ simpleColor ]
-patternCount = len(patternList)
+patternList = []
+patternCount = 0
+
+def setList(party):
+    global patternList, patternCount
+    if (party == True):
+        print("Party mode")
+        patternList = [ worm, colorwave, fireflies, rainbow, smoothRainbow, setRange ]
+        patternCount = len(patternList)
+    else:
+        print("Chill mode")
+        patternList = [ simpleColor ]
+        patternCount = len(patternList)

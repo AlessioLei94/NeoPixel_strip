@@ -1,4 +1,5 @@
 from Neopixel_lib import neopixel
+import Buttons.buttons as Buttons
 import Patterns.patterns as Patterns
 import Fsm.fsm as Fsm
 import time
@@ -9,7 +10,8 @@ strip.brightness(Patterns.__brightness__)
 
 Fsm.init(strip, numpix)
 
+
 while True:
-    Fsm.run()
+    Fsm.run(Buttons.checkPartyBtnState())
 
     time.sleep(0.1)
