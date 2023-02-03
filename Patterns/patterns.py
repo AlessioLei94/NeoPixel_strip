@@ -26,10 +26,13 @@ def simpleColor(strip, numpix):
     blue = (0, 0, 255)
     indigo = (75, 0, 130)
     violet = (138, 43, 226)
-    colors = (red, orange, yellow, green, blue, indigo, violet)
+    lightBlue = (18, 204, 198)
+    lightGreen = (37, 184, 20)
+    waterGreen = (35, 207, 115)
+    colors = (red, orange, yellow, green, blue, indigo, violet, lightBlue, lightGreen, waterGreen)
 
     color = colors[random.randint(0, len(colors)-1)]
-    print(color[0], color[1], color[2])
+    #print(color[0], color[1], color[2])
 
     strip.fill(color)
 
