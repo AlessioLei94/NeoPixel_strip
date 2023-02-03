@@ -15,6 +15,33 @@ def checkStop():
         __patternStop__ = False
         return True
 
+def simpleColor(strip, numpix):
+    global __patternStop__
+    print("Simple color starting")
+
+    red = (255, 0, 0)
+    orange = (255, 165, 0)
+    yellow = (255, 150, 0)
+    green = (0, 255, 0)
+    blue = (0, 0, 255)
+    indigo = (75, 0, 130)
+    violet = (138, 43, 226)
+    colors = (red, orange, yellow, green, blue, indigo, violet)
+
+    color = colors[random.randint(0, len(colors)-1)]
+    print(color[0], color[1], color[2])
+
+    strip.fill(color)
+
+    strip.show()
+
+    while True:
+        # Check if we need to stop
+        if(checkStop()):
+            return
+
+        time.sleep(0.01)
+
 def rainbow(strip, numpix):
     global __patternStop__
     print("Rainbow starting")
@@ -185,5 +212,6 @@ def setRange(strip, numpix):
         if(checkStop()):
             return
 
-patternList = [ worm, colorwave, fireflies, rainbow, smoothRainbow, setRange ]
+#patternList = [ worm, colorwave, fireflies, rainbow, smoothRainbow, setRange ]
+patternList = [ simpleColor ]
 patternCount = len(patternList)
