@@ -14,9 +14,13 @@ btn4T = 0
 
 __debounceT_ = 500
 
+def checkPartyBtnState():
+    global btn3Pin
+    if btn3Pin.value() == 1:
+        return True
+
 def btn1Cb(pin):
     global btn1T, __debounceT_
-
     if((time.ticks_ms() - btn1T) > __debounceT_ or (btn1T == 0)):
         btn1T = time.ticks_ms()
         Fsm.patternFW()
