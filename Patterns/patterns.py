@@ -34,14 +34,13 @@ def simpleColor(strip, numpix):
     color = colors[random.randint(0, len(colors)-1)]
     #print(color[0], color[1], color[2])
 
-    strip.fill(color)
-
-    strip.show()
-
     while True:
         # Check if we need to stop
         if(checkStop()):
             return
+        
+        strip.fill(color)
+        strip.show()
 
         time.sleep(0.01)
 
