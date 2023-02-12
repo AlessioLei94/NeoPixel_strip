@@ -46,7 +46,7 @@ def btn4Cb(pin):
         btn4T = time.ticks_ms()
         Fsm.brightDw()
 
-def Init():
+def init():
     btn1Pin.irq(btn1Cb, trigger=Pin.IRQ_RISING)
     btn2Pin.irq(btn2Cb, trigger=Pin.IRQ_RISING)
     btn3Pin.irq(btn3Cb, trigger=Pin.IRQ_RISING)
