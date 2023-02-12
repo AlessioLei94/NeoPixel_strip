@@ -1,5 +1,6 @@
 import Buttons.buttons as Buttons
 import Patterns.patterns as Patterns
+import Settings.settings as Settings
 
 # FSM states
 FSM_INIT = 0
@@ -46,20 +47,22 @@ def patternBW():
     Patterns.stopCurrentPattern()
 
 def brightUp():
-    Patterns.__brightness__ += Patterns.__brightStep__
-
-    if(Patterns.__brightness__ > 255):
-        Patterns.__brightness__ = 255
+    if(Patterns.__brightness__ < 255):
+        Patterns.__brightness__ += Patterns.__brightStep__
+        Patterns.__brightness__ = min(Patterns.__brightness__, 255)
+        # If changed, write setting to file
+        Settings.writeSetting(Patterns.__brightness__)
 
     print("Brightness is now ", Patterns.__brightness__)
 
     __strip__.brightness(Patterns.__brightness__)
 
 def brightDw():
-    Patterns.__brightness__ -= Patterns.__brightStep__
-
-    if(Patterns.__brightness__ < 0):
-        Patterns.__brightness__ = 0
+    if(Patterns.__brightness__ > 0):
+        Patterns.__brightness__ -= Patterns.__brightStep__
+        Patterns.__brightness__ = max(Patterns.__brightness__, 0)
+        # If changed, write setting to file
+        Settings.writeSetting(Patterns.__brightness__)
 
     print("Brightness is now ", Patterns.__brightness__)
 
@@ -72,8 +75,8 @@ def run(party):
     global __strip__, __numpix__
 
     if(__fsmState__ == FSM_INIT):
-        Buttons.Init()
-        Patterns.setList(party)
+        Buttons.init()
+        Patterns.init(party)
         __fsmState__ = FSM_RUN
 
     elif(__fsmState__ == FSM_RUN):
