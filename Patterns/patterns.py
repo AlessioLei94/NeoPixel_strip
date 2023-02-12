@@ -1,4 +1,5 @@
 import time, random
+import Settings.settings as Settings
 from Patterns.worm import worm
 
 __patternStop__ = False
@@ -229,3 +230,10 @@ def setList(party):
         print("Chill mode")
         patternList = [ simpleColor ]
         patternCount = len(patternList)
+
+def init(mode):
+    global __brightness__
+
+    __brightness__ = Settings.readSetting()
+    print("Brightness", __brightness__)
+    setList(mode)
