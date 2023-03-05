@@ -72,7 +72,7 @@ def worm(strip, npx):
     lenght = random.randint(15, 50)
     head = 1
     butt = head - lenght
-    step_len = lenght / 3
+    step_len = int(lenght / 3)
     sleepTime = 0.2 #sec
     color1 = (0,0,0)
     color2 = (0,0,0)
