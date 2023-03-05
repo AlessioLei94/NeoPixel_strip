@@ -5,7 +5,7 @@ import Fsm.fsm as Fsm
 import time
 
 numpix = 120
-strip = neopixel.Neopixel(numpix, 1, 1, "GRB")
+strip = neopixel.Neopixel(numpix, 1, 15)
 
 Fsm.init(strip, numpix)
 
