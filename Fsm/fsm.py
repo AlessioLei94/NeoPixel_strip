@@ -76,7 +76,7 @@ def run(party):
 
     if(__fsmState__ == FSM_INIT):
         Buttons.init()
-        Patterns.init(party)
+        Patterns.init(__strip__, party)
         __fsmState__ = FSM_RUN
 
     elif(__fsmState__ == FSM_RUN):

@@ -6,7 +6,6 @@ import time
 
 numpix = 120
 strip = neopixel.Neopixel(numpix, 1, 1, "GRB")
-strip.brightness(Patterns.__brightness__)
 
 Fsm.init(strip, numpix)
 

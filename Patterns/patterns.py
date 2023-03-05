@@ -231,9 +231,11 @@ def setList(party):
         patternList = [ simpleColor ]
         patternCount = len(patternList)
 
-def init(mode):
+def init(strip, mode):
     global __brightness__
 
+        # Load brightness and set it to the strip
     __brightness__ = Settings.readSetting()
+    strip.brightness(__brightness__)
     print("Brightness", __brightness__)
     setList(mode)
