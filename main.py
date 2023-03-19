@@ -11,6 +11,6 @@ Fsm.init(strip, numpix)
 
 
 while True:
-    Fsm.run(Buttons.checkPartyBtnState())
+    Fsm.run(Buttons.checkMode())
 
     time.sleep(0.1)

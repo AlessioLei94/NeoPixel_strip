@@ -19,6 +19,19 @@ def checkPartyBtnState():
     if btn3Pin.value() == 1:
         return True
 
+def checkMicBtnState():
+    global btn4Pin
+    if btn4Pin.value() == 1:
+        return True
+
+def checkMode():
+    if checkPartyBtnState():
+        return 0
+    elif checkMicBtnState():
+        return 2
+    else:
+        return 1
+
 def btn1Cb(pin):
     global btn1T, __debounceT_
     if((time.ticks_ms() - btn1T) > __debounceT_ or (btn1T == 0)):
