@@ -1,6 +1,7 @@
 import time, random
 import Settings.settings as Settings
 from Patterns.worm import worm
+from Patterns.mic import soundWave
 
 __patternStop__ = False
 __brightness__ = 100 #Default
@@ -220,15 +221,19 @@ def setRange(strip, numpix):
 patternList = []
 patternCount = 0
 
-def setList(party):
+def setList(mode):
     global patternList, patternCount
-    if (party == True):
+    if (mode == 0):
         print("Party mode")
         patternList = [ worm, colorwave, fireflies, rainbow, smoothRainbow, setRange ]
         patternCount = len(patternList)
-    else:
+    elif (mode == 1):
         print("Chill mode")
         patternList = [ simpleColor ]
+        patternCount = len(patternList)
+    elif (mode == 2):
+        print("Mic mode")
+        patternList = [ soundWave ]
         patternCount = len(patternList)
 
 def init(strip, mode):
