@@ -10,9 +10,12 @@ def soundWave(strip, npx):
 
     print("Mic pattern starting")
 
+    # Multiplying factor used to adjust mic sensitivity
+    micAmplfy = 3
     # Power ON mic board
     Mic.setPwr(True)
-
+    
+    # Colors list
     red = (255, 0, 0)
     orange = (255, 165, 0)
     yellow = (255, 150, 0)
@@ -25,11 +28,13 @@ def soundWave(strip, npx):
     waterGreen = (35, 207, 115)
     colors = (red, orange, yellow, green, blue, indigo, violet, lightBlue, lightGreen, waterGreen)
 
+    # Reference points used in calculations
     stripCenter = int(npx / 2)
     waveBaseLen = 30
     waveExpRoom = npx - waveBaseLen
     micDiff = __maxMicOut - __baseMicOut
 
+    # Pick two colors
     mainColor = colors[random.randint(0, len(colors)-1)]
     waveColor = colors[random.randint(0, len(colors)-1)]
     # Make sure it's two different colors
@@ -51,7 +56,7 @@ def soundWave(strip, npx):
 
         print("Input diff:", diff)
 
-        waveExp = ((waveExpRoom * diff) / micDiff) * 2
+        waveExp = ((waveExpRoom * diff) / micDiff) * micAmplfy
 
         print("Wave expansion:", waveExp)
 
