@@ -69,7 +69,7 @@ def soundWave(strip, npx):
         strip[newLow:newHigh] = waveColor
         strip.show()
 
-        time.sleep_ms(100)
+        time.sleep_ms(50)
 
         if patterns.checkStop():
             break
