@@ -1,5 +1,5 @@
 import Mic_lib.mic_lib as Mic
-import time, random
+import time, random, math
 from Patterns import patterns
 
 __maxMicOut = 65535
@@ -45,31 +45,63 @@ def soundWave(strip, npx):
 
     lowEnd = stripCenter-int(waveBaseLen/2)
     highEnd = stripCenter+int(waveBaseLen/2)
+    oldExp = 0
 
+    # Fill strip buffer for the first time
     strip.fill(mainColor)
     strip[lowEnd:highEnd] = waveColor
+    # Show base wave
     strip.show()
 
     while True:
+        # Read mic input
         noise = Mic.readMic()
-        diff = noise - __baseMicOut
+        # Calculate difference in input from 0dB input voltage
+        diff = abs(noise - __baseMicOut)
 
-        print("Input diff:", diff)
+        # print("Input diff:", diff)
 
+        # calulcate wave expansion based on mic input
         waveExp = ((waveExpRoom * diff) / micDiff) * micAmplfy
 
-        print("Wave expansion:", waveExp)
+        # print("Wave expansion:", waveExp)
 
-        newLow = max((lowEnd - int(waveExp/2)), 0)
-        newHigh = min((highEnd + int(waveExp/2)), npx)
+        if (waveExp > oldExp):
+            #Calculate how much to extend
+            diff = (waveExp - oldExp) / 2
+            # Bigger wave
+            for _ in range(1, diff):
+                # Decrese low end, now smaller than zero
+                lowEnd = max((lowEnd - 1), 0)
+                # Increase highEnd, not bigger than npx
+                highEnd = min((highEnd + 1), npx)
+                # Print wave to strip buffer
+                strip.fill(mainColor)
+                strip[lowEnd:highEnd] = waveColor
+                # Show wave
+                strip.show()
 
-        print("lowEnd", newLow, "highEnd", newHigh)
+                # print("B -> lowEnd:", lowEnd, "highEnd:", highEnd)
+        elif (waveExp < oldExp):
+            #Calculate how much to shrink
+            diff = (oldExp - waveExp) / 2
+            # Smaller wave
+            for _ in range(1, diff):
+                # Increase lowEnd, not bigger than lowEnd base
+                lowEnd = min((lowEnd + 1), stripCenter - int(waveBaseLen/2))
+                # Decrese highEnd, not smaller than highEnd base
+                highEnd = max((highEnd - 1), stripCenter + int(waveBaseLen/2))
+                # Print wave to strip buffer
+                strip.fill(mainColor)
+                strip[lowEnd:highEnd] = waveColor
+                # Show wave
+                strip.show()
 
-        strip.fill(mainColor)
-        strip[newLow:newHigh] = waveColor
-        strip.show()
+                # print("S -> lowEnd:", lowEnd, "highEnd:", highEnd)
 
-        time.sleep_ms(50)
+        oldExp = waveExp
+
+        time.sleep_ms(1)
 
         if patterns.checkStop():
             break
