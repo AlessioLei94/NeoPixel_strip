@@ -39,7 +39,7 @@ def setRangeInit(strip, numpix, colorsList):
 def setRange(strip, numpix, colorsList):
     global sleepTime, spinTime, idx
 
-    print("setRange running")
+    # print("setRange running")
 
     if(idx * sleepTime >= sleepTime):
         strip.rotate_right()

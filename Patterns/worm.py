@@ -77,7 +77,7 @@ def wormInit(strip, numpix, colorsList):
 
 def worm(strip, numpix, colorsList):
     global wormObj
-    print("Worm running")
+    # print("Worm running")
 
     #bigger
     for _ in range(wormObj.step_len):

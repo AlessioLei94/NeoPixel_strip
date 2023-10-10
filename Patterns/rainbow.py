@@ -7,7 +7,7 @@ def rainbowInit(strip, numpix, colorsList):
     return
 
 def rainbow(strip, numpix, colorsList):
-    print("Rainbow running")
+    # print("Rainbow running")
 
     for color in colorsList:
         for i in range(numpix):

@@ -34,7 +34,7 @@ def simpleColorInit(strip, numpix, colorsList):
     print("Simple color initialized with R:", __color[0], " G:", __color[1], " B:", __color[2])
 
 def simpleColor(strip, numpix, colorsList):
-    print("Simple color running")
+    # print("Simple color running")
 
     strip.fill(__color)
     strip.show()

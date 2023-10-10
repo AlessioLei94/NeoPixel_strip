@@ -16,7 +16,7 @@ def colorwaveInit(strip, numpix, colorsList):
 
 
 def colorwave(strip, numpix=None, colorsList=None):
-    print("Colorwave running")
+    # print("Colorwave running")
 
     strip.rotate_right(1)
     time.sleep(0.042)

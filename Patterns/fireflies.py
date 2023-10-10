@@ -23,7 +23,7 @@ def firefliesInit(strip, numpix, colorsList):
 
 def fireflies(strip, numpix, colorsList):
     global max_len, min_len, flashing, num_flashes
-    print("Fireflies running")
+    # print("Fireflies running")
 
     strip.show()
     for i in range(num_flashes):
